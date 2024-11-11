@@ -27,8 +27,4 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role",nullable = false)
     private Role role;
-
-    // One user can have many purchases
-//    @OneToMany(mappedBy = "user")
-//    private List<Purchase> purchases;
 }

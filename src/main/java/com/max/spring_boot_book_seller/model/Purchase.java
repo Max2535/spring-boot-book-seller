@@ -2,29 +2,25 @@ package com.max.spring_boot_book_seller.model;
 
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
+import lombok.Data;
 
 import java.time.LocalTime;
+
+@Data
 @Entity
-@Table(name = "purchases")
+@Table(name = "purchases_history")
 public class Purchase {
 
-    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
-
+    @Column(name = "user_id", nullable = false)
+    private long userId;
+    @Column(name = "book_id", nullable = false)
+    private long bookId;
+    @Column(name = "price", nullable = false)
+    private double price;
+    @Column(name = "purchase_time", nullable = false)
     private LocalTime purchaseTime;
-    private Double price;
-
-    // Getters and Setters
 }
 
