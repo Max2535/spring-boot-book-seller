@@ -22,7 +22,7 @@ public class User {
     @Column(name = "name",nullable = false,length = 100)
     private String name;
     @Column(name = "create_time",nullable = false)
-    private LocalDateTime create_time;
+    private LocalDateTime createTime;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role",nullable = false)
