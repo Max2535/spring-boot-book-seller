@@ -1,6 +1,8 @@
 package com.max.spring_boot_book_seller.security;
 
+import com.max.spring_boot_book_seller.model.Role;
 import com.max.spring_boot_book_seller.model.User;
+import com.max.spring_boot_book_seller.util.SecurityUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +25,16 @@ public class UserPrincipal implements UserDetails {
     transient private String password; // transient keyword is used to indicate that a field should not be serialized
     transient private User user; // transient keyword is used to indicate that a field should not be serialized
     private Set<GrantedAuthority> authorities;
+
+    public static UserPrincipal createSuperUser() {
+        Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertToAuthority((Role.SYSTEM_MANAGER.name())));
+
+        return UserPrincipal.builder()
+                .id(-1L)
+                .username("system-administrator")
+                .authorities(authorities)
+                .build();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -31,7 +31,7 @@ public class JwtProvider implements IJwtProvider {
     public String generateToken(UserPrincipal auth){
         String authorities = auth.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining());
+                .collect(Collectors.joining(","));
 
         return Jwts.builder()
                 .setSubject(auth.getUsername())
