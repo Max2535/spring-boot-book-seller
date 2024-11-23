@@ -6,6 +6,7 @@ import com.max.spring_boot_book_seller.security.jwt.JwtAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -28,6 +29,7 @@ public class SecurityConfig {
     private String internalApiKey;
 
     @Autowired
+    @Lazy
     private CustomUserDetailsService customUserDetailsService;
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
