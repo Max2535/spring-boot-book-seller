@@ -18,16 +18,17 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserPrincipal implements UserDetails {
-
+public class UserPrincipal implements UserDetails
+{
     private Long id;
     private String username;
-    transient private String password; // transient keyword is used to indicate that a field should not be serialized
-    transient private User user; // transient keyword is used to indicate that a field should not be serialized
+    transient private String password; //don't show up on an searialized places
+    transient private User user; //user for only login operation, don't use in JWT.
     private Set<GrantedAuthority> authorities;
 
-    public static UserPrincipal createSuperUser() {
-        Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertToAuthority((Role.SYSTEM_MANAGER.name())));
+    public static UserPrincipal createSuperUser()
+    {
+        Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertToAuthority(Role.SYSTEM_MANAGER.name()));
 
         return UserPrincipal.builder()
                 .id(-1L)
@@ -37,37 +38,44 @@ public class UserPrincipal implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+    public Collection<? extends GrantedAuthority> getAuthorities()
+    {
+        return authorities;
     }
 
     @Override
-    public String getPassword() {
-        return "";
+    public String getPassword()
+    {
+        return password;
     }
 
     @Override
-    public String getUsername() {
-        return "";
+    public String getUsername()
+    {
+        return username;
     }
 
     @Override
-    public boolean isAccountNonExpired() {
+    public boolean isAccountNonExpired()
+    {
         return true;
     }
 
     @Override
-    public boolean isAccountNonLocked() {
+    public boolean isAccountNonLocked()
+    {
         return true;
     }
 
     @Override
-    public boolean isCredentialsNonExpired() {
+    public boolean isCredentialsNonExpired()
+    {
         return true;
     }
 
     @Override
-    public boolean isEnabled() {
+    public boolean isEnabled()
+    {
         return true;
     }
 }
