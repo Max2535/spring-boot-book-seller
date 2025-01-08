@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,8 +39,9 @@ public class JwtProvider implements IJwtProvider
                 .collect(Collectors.joining(","));
 
         String token = null;
-//        Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes());
-        Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512); // สร้าง Key ที่ปลอดภัย
+        byte[] decodedKey = Base64.getDecoder().decode(JWT_SECRET);
+        Key key  = Keys.hmacShaKeyFor(decodedKey);
+
         try{
             token = Jwts.builder()
                     .setSubject(auth.getUsername())

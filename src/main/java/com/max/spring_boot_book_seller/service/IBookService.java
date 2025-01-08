@@ -4,10 +4,11 @@ import com.max.spring_boot_book_seller.model.Book;
 
 import java.util.List;
 
-public interface IBookService {
-    Book save(Book book);
+public interface IBookService
+{
+    Book saveBook(Book book);
 
-    void deleteById(Long id);
+    void deleteBook(Long id);
 
-    List<Book> findAll();
+    List<Book> findAllBooks();
 }

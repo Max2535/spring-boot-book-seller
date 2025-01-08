@@ -3,27 +3,33 @@ package com.max.spring_boot_book_seller.service;
 import com.max.spring_boot_book_seller.model.PurchaseHistory;
 import com.max.spring_boot_book_seller.repository.IPurchaseHistoryRepository;
 import com.max.spring_boot_book_seller.repository.projection.IPurchaseItem;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class PurchaseHistoryService implements IPurchaseHistoryService {
-
+@Service
+public class PurchaseHistoryService implements IPurchaseHistoryService
+{
     private final IPurchaseHistoryRepository purchaseHistoryRepository;
 
-    public PurchaseHistoryService(IPurchaseHistoryRepository purchaseHistoryRepository) {
+    public PurchaseHistoryService(IPurchaseHistoryRepository purchaseHistoryRepository)
+    {
         this.purchaseHistoryRepository = purchaseHistoryRepository;
     }
 
     @Override
-    public PurchaseHistory savePurchaseHistory(PurchaseHistory purchaseHistory) {
+    public PurchaseHistory savePurchaseHistory(PurchaseHistory purchaseHistory)
+    {
         purchaseHistory.setPurchaseTime(LocalDateTime.now());
+
         return purchaseHistoryRepository.save(purchaseHistory);
     }
 
     @Override
-    public List<IPurchaseItem> findAllPurchasesOfUser(Long userId) {
+    public List<IPurchaseItem> findPurchasedItemsOfUser(Long userId)
+    {
         return purchaseHistoryRepository.findAllPurchasesOfUser(userId);
     }
-
 }
+
